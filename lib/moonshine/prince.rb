@@ -20,6 +20,7 @@ module Moonshine
         :ensure => :installed
 
       if version == 7.2
+        package_name = 'prince_7.2-4ubuntu10.04_amd64.deb'
         # Install pre-release package for Lucid compatibility
         # http://princecss.com/bb/viewtopic.php?f=2&t=1266&start=30
         %w(libgif4).each do |p|
@@ -27,15 +28,15 @@ module Moonshine
             :ensure => :installed
         end
         exec "download prince",
-          :creates => "/usr/local/src/prince_7.2-3ubuntu10.04_amd64.deb",
-          :command => "wget http://www.princexml.com/download/prince_7.2-3ubuntu10.04_amd64.deb",
+          :creates => "/usr/local/src/#{package_name}",
+          :command => "wget http://www.princexml.com/download/#{package_name}",
           :cwd => "/usr/local/src",
           :require => package("wget")
 
         package "prince",
           :ensure => :installed,
           :provider => :dpkg,
-          :source => "/usr/local/src/prince_7.2-3ubuntu10.04_amd64.deb",
+          :source => "/usr/local/src/#{package_name}",
           :require => [
             exec("download prince"),
             package("libgif4")
