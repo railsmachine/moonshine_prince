@@ -15,14 +15,12 @@ module Moonshine
       # options specified with the configure method will be 
       # automatically available here in the options hash.
       #    options[:foo]   # => true
-      version = options[:version] || 7.1
+      version = options[:version] || 7.2
       package "wget",
         :ensure => :installed
 
       if version == 7.2
         package_name = 'prince_7.2-4ubuntu10.04_amd64.deb'
-        # Install pre-release package for Lucid compatibility
-        # http://princecss.com/bb/viewtopic.php?f=2&t=1266&start=30
         %w(libgif4).each do |p|
           package p,
             :ensure => :installed
