@@ -51,8 +51,17 @@ module Moonshine
             :require => package("prince")
         end
 
-      else
-        # install prince from source
+      else # install prince from source
+        if version.match(/7.1/)
+          # download url format: http://www.princexml.com/download/prince-7.1-linux.tar.gz
+          full_version = version
+        elsif version.match(/6.0/)
+          # download url format: http://www.princexml.com/download/prince-6.0r8-linux.tar.gz
+          version = '6.0'
+          revision = '8'
+          full_version = "#{version}r#{revision}"
+        end
+
         %w(fontconfig fontconfig-config).each do |p|
           package p,
             :ensure => :installed
@@ -60,9 +69,9 @@ module Moonshine
 
         exec "install prince",
           :command => [
-            "wget http://www.princexml.com/download/prince-#{version}-linux.tar.gz --output-document prince-#{version}-linux.tar.gz",
-            "tar -xzf prince-#{version}-linux.tar.gz",
-            "cd prince-#{version}-linux",
+            "wget http://www.princexml.com/download/prince-#{full_version}-linux.tar.gz --output-document prince-#{full_version}-linux.tar.gz",
+            "tar -xzf prince-#{full_version}-linux.tar.gz",
+            "cd prince-#{full_version}-linux",
             "sed '/^read input/ c\# read input' -i install.sh", # remove user input and accept default install path
             "/bin/bash install.sh"
           ].join(' ; '),
