@@ -46,3 +46,7 @@ or in your manifest;
 ## Dependencies
 
 * [moonshine_msttcorefonts](https://github.com/railsmachine/moonshine_msttcorefonts)
+
+## Copyright
+
+Unless otherwise specified, all content copyright &copy; 2014, [Rails Machine, LLC](http://railsmachine.com)
