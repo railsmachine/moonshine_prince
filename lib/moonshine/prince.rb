@@ -55,7 +55,6 @@ module Moonshine
             :require => package("prince")
         end
 
-      else # install prince from source
         if version.match(/8.1/)
           version = '8.1'
           revision = '5'
@@ -91,6 +90,6 @@ module Moonshine
             :source => options[:license_file_path],
             :require => exec("install prince")
         end
-      end
-   end
+    end
+  end
 end
