@@ -15,16 +15,20 @@ module Moonshine
       # options specified with the configure method will be 
       # automatically available here in the options hash.
       #    options[:foo]   # => true
-      version = options[:version] || 9.0 
+      version = options[:version].to_s || '9.0' 
+      if ubuntu_lucid?
+        os_version='10.04'
+      elsif ubuntu_precise?
+        os_version='12.04'
+      elsif ubuntu_trusty?
+        os_version='14.04'
+      end
+
       package "wget",
         :ensure => :installed
 
-      if version == 9.0 
-        package_name = 'prince_9.0-5_ubuntu10.04_amd64.deb'
-        %w(libgif4).each do |p|
-          package p,
-            :ensure => :installed
-        end
+      package_name = "prince_#{version}-5_ubuntu#{os_version}_amd64.deb"
+
         exec "download prince",
           :creates => "/usr/local/src/#{package_name}",
           :command => "wget http://www.princexml.com/download/#{package_name}",
@@ -88,6 +92,5 @@ module Moonshine
             :require => exec("install prince")
         end
       end
-    end
-  end
+   end
 end
