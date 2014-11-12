@@ -15,12 +15,12 @@ module Moonshine
       # options specified with the configure method will be 
       # automatically available here in the options hash.
       #    options[:foo]   # => true
-      version = options[:version] || 7.2
+      version = options[:version] || 9.0 
       package "wget",
         :ensure => :installed
 
-      if version == 7.2
-        package_name = 'prince_7.2-4ubuntu10.04_amd64.deb'
+      if version == 9.0 
+        package_name = 'prince_9.0-5_ubuntu10.04_amd64.deb'
         %w(libgif4).each do |p|
           package p,
             :ensure => :installed
@@ -52,13 +52,14 @@ module Moonshine
         end
 
       else # install prince from source
-        if version.match(/7.1/)
-          # download url format: http://www.princexml.com/download/prince-7.1-linux.tar.gz
-          full_version = version
-        elsif version.match(/6.0/)
+        if version.match(/8.1/)
+          version = '8.1'
+          revision = '5'
+          full_version = "#{version}r#{revision}"
+        elsif version.match(/9.0/)
           # download url format: http://www.princexml.com/download/prince-6.0r8-linux.tar.gz
-          version = '6.0'
-          revision = '8'
+          version = '9.0'
+          revision = '5'
           full_version = "#{version}r#{revision}"
         end
 
