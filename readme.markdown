@@ -20,6 +20,9 @@ Moonshine::Prince is installed as a Rails plugin:
     script/plugin install git://github.com/railsmachine/moonshine_prince.git
     # Rails 3.x.x
     script/rails plugin install git://github.com/railsmachine/moonshine_prince.git
+    # Rails 4.x.x
+    Add <code>gem 'plugger'</code> to your Gemfile and bundle install, then:
+    plugger install git://github.com/railsmachine/moonshine_prince.git
 
 Once it's installed, you can include it in your manifest:
 
@@ -37,11 +40,11 @@ Once it's installed, you can include it in your manifest:
 Configure the version in your moonshine.yml:
 
     :prince:
-      :version: 7.1
+      :version: 9.0 
 
 or in your manifest;
 
-    configure(:prince => {:version => '6.0'})
+    configure(:prince => {:version => '9.0'})
 
 ## Dependencies
 
