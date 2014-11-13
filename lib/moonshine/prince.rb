@@ -26,6 +26,9 @@ module Moonshine
 
       package "wget",
         :ensure => :installed
+      
+      package "libgif4",
+        :ensure => :installed
 
       package_name = "prince_#{version}-5_ubuntu#{os_version}_amd64.deb"
 
