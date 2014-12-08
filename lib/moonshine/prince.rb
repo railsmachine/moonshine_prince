@@ -39,7 +39,7 @@ module Moonshine
         :require => package("wget")
 
       package "prince",
-        :ensure => :version,
+        :ensure => :installed,
         :provider => :dpkg,
         :source => "/usr/local/src/#{package_name}",
         :require => [
